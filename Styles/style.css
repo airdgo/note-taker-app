@@ -36,6 +36,9 @@ body, .container {
 }
 
 .note-output {
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
   border: 1px solid #121212;
 }
 /*# sourceMappingURL=style.css.map */
