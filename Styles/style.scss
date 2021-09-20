@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+%flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body, .container {
+    @extend %flex-center;
+    flex-direction: column;
+}
+
+.note-wraper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-gap: 20px;
+    width: 80%;
+    max-width: 80rem;
+    margin-top: 1rem;
+}
+
+.note-output {
+    border: 1px solid #121212;
+}
