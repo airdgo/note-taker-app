@@ -14,15 +14,16 @@
     <div class="container">
         <header>
             <h1>Note Taker</h1>
-            <p>Add a New Note:</p>
         </header>
-        <div class="add-note">
-            <form>
-                <label>Note:</label>
-                <textarea id="input" rows="4" cols="50">
 
-                </textarea>
-                <input id="submit" type="submit" value="Add Note">
+        <div class="add-note">
+            <h3>Here you can add a note!</h3>
+            <form>
+                <textarea id="input" rows="3" cols="60" placeholder="Add a New Note"></textarea>
+                <div class="add-note-buttons-wraper">
+                    <input id="submit" type="submit" value="Add Note">
+                    <button id="clear_notes">Clear Notes</button>
+                </div>
             </form>
         </div>
     </div>
@@ -33,10 +34,7 @@
 
     <div id="modal_container" class="modal-container">
         <div id="modal" class="modal">
-            <h1>This is my first modal</h1>
-            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid eaque ipsum inventore! Odio, alias
-                voluptatem error magni recusandae dicta commodi?
-            </p> -->
+            <h1>Note:</h1>
             <p id="modal_text"></p>
             <button id="close">
                 Close me

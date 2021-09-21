@@ -8,32 +8,60 @@ const modalContainer = document.getElementById('modal_container');
 const modal = document.getElementById('modal');
 const modalText = document.getElementById('modal_text');
 
+const clearNotes = document.getElementById('clear_notes');
+
 submitNote.addEventListener('click', e => {
     e.preventDefault();
     submitNoteFunction();
 })
 
+clearNotes.addEventListener('click', e => {
+    e.preventDefault();
+    noteWraper.style.opacity = '0';
+    noteWraper.innerHTML = '';
+})
+
 const submitNoteFunction = () => {
     const noteOutput = document.createElement('div');
     noteOutput.className = 'note-output';
-    const h3 = document.createElement('h3');
-    h3.innerText = 'Note:';
-    const p = document.createElement('p');
-    p.innerText = truncate(input.value);
-    const ps = document.createElement('p');
-    ps.innerText = input.value;
+
+    const noteHeading = document.createElement('h3');
+    noteHeading.innerText = 'Note:';
+
+    const noteParagraph = document.createElement('p');
+    noteParagraph.innerText = truncate(input.value);
+
+    const modalParagraph = document.createElement('p');
+    modalParagraph.innerText = input.value;
 
     const viewMoreButton = document.createElement('button');
+    viewMoreButton.className = 'view-more-button'
     viewMoreButton.innerText = 'View More';
     viewMoreButton.onclick = () => {
-        modalText.innerText = ps.innerText;
+        modalText.innerText = modalParagraph.innerText;
         modalContainer.classList.add('show');
     }
 
-    noteOutput.appendChild(h3);
-    noteOutput.appendChild(p);
+    const removeNote = document.createElement('button');
+    removeNote.className = 'remove-note';
+    removeNote.innerText = 'X';
+    removeNote.onclick = () => {
+        removeNote.parentNode.remove();
+    }
+
+    const noteHead = document.createElement('div');
+    noteHead.className = 'note-head';
+    noteHead.appendChild(noteHeading);
+    noteHead.appendChild(removeNote);
+
+    noteOutput.appendChild(noteHead);
+    noteOutput.appendChild(noteParagraph);
     noteOutput.appendChild(viewMoreButton);
     noteWraper.appendChild(noteOutput);
+
+    noteWraper.style.opacity = '1';
+
+    input.value = '';
 }
 
 closeButton.addEventListener('click', e => {
@@ -42,8 +70,8 @@ closeButton.addEventListener('click', e => {
 });
 
 function truncate(input) {
-    if (input.length > 150) {
-        return input.substring(0, 150) + '...';
+    if (input.length > 100) {
+        return input.substring(0, 100) + '...';
     }
     return input;
 };
