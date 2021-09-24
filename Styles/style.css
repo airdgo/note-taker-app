@@ -40,7 +40,6 @@ body {
 .note-wraper {
   display: -ms-grid;
   display: grid;
-  opacity: 0;
   justify-items: center;
   -ms-grid-columns: (minmax(20rem, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));

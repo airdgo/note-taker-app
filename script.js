@@ -46,7 +46,7 @@ const submitNoteFunction = () => {
     removeNote.className = 'remove-note';
     removeNote.innerText = 'X';
     removeNote.onclick = () => {
-        removeNote.parentNode.remove();
+        removeNote.parentNode.parentNode.remove();
     }
 
     const noteHead = document.createElement('div');

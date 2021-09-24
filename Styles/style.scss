@@ -31,7 +31,6 @@ body {
 
 .note-wraper {
     display: grid;
-    opacity: 0;
     justify-items: center;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     grid-gap: 20px;
