@@ -157,6 +157,7 @@ textarea {
     opacity: 0;
     pointer-events: none;
     transition: opacity 300ms ease;
+    overflow: auto;
 }
 
 .modal-container.show {
@@ -170,9 +171,7 @@ textarea {
     max-width: 70rem;
     padding: 2rem 3rem;
     border-radius: .5em;
-}
-
-.modal {
+    
     button {
         display: block;
         cursor: pointer;

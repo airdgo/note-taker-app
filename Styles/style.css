@@ -190,6 +190,7 @@ textarea {
   pointer-events: none;
   -webkit-transition: opacity 300ms ease;
   transition: opacity 300ms ease;
+  overflow: auto;
 }
 
 .modal-container.show {

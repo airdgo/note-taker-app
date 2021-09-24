@@ -1,67 +1,82 @@
+const addNoteButton = document.getElementById('submit');
 const input = document.getElementById('input');
-const submitNote = document.getElementById('submit');
-const noteWraper = document.getElementById('note-wraper');
-
-const openButton = document.getElementById('open');
-const closeButton = document.getElementById('close');
-const modalContainer = document.getElementById('modal_container');
-const modal = document.getElementById('modal');
-const modalText = document.getElementById('modal_text');
-
 const clearNotes = document.getElementById('clear_notes');
+const modalContainer = document.getElementById('modal_container');
+const closeButton = document.getElementById('close');
 
-submitNote.addEventListener('click', e => {
+// Add notes
+addNoteButton.addEventListener('click', e => {
     e.preventDefault();
-    submitNoteFunction();
-})
 
-clearNotes.addEventListener('click', e => {
-    e.preventDefault();
-    noteWraper.style.opacity = '0';
-    noteWraper.innerHTML = '';
-})
-
-const submitNoteFunction = () => {
-    const noteOutput = document.createElement('div');
-    noteOutput.className = 'note-output';
-
-    const noteHeading = document.createElement('h3');
-    noteHeading.innerText = 'Note:';
-
-    const noteParagraph = document.createElement('p');
-    noteParagraph.innerText = truncate(input.value);
-
-    const modalParagraph = document.createElement('p');
-    modalParagraph.innerText = input.value;
-
-    const viewMoreButton = document.createElement('button');
-    viewMoreButton.className = 'view-more-button'
-    viewMoreButton.innerText = 'View More';
-    viewMoreButton.onclick = () => {
-        modalText.innerText = modalParagraph.innerText;
-        modalContainer.classList.add('show');
+    if (input.value == '') {
+        return alert('Please add a note')
     }
 
-    const removeNote = document.createElement('button');
-    removeNote.className = 'remove-note';
-    removeNote.innerText = 'X';
-    removeNote.onclick = () => {
-        removeNote.parentNode.parentNode.remove();
-    }
+    let notes = localStorage.getItem('notes');
+    if (notes === null) {
+        notesObj = [];
+    } else {
+        notesObj = JSON.parse(notes);
+    };
 
-    const noteHead = document.createElement('div');
-    noteHead.className = 'note-head';
-    noteHead.appendChild(noteHeading);
-    noteHead.appendChild(removeNote);
+    let myObj = {
+        input: input.value
+    };
 
-    noteOutput.appendChild(noteHead);
-    noteOutput.appendChild(noteParagraph);
-    noteOutput.appendChild(viewMoreButton);
-    noteWraper.appendChild(noteOutput);
-
-    noteWraper.style.opacity = '1';
-
+    notesObj.push(myObj);
+    localStorage.setItem('notes', JSON.stringify(notesObj));
     input.value = '';
+
+    showNotes();
+})
+
+// Clear all notes
+clearNotes.onclick = () => {
+    localStorage.clear();
+};
+
+// Show notes on page
+const showNotes = () => {
+    let notes = localStorage.getItem('notes');
+    let noteWraper = document.getElementById('note-wraper');
+    if (notes === null) {
+        notesObj = [];
+    } else {
+        notesObj = JSON.parse(notes);
+    };
+
+    let html = ''
+    notesObj.forEach((element, index) => {
+        html += `
+                <div class="note-output">
+                    <div class="note-head">
+                        <h3>Note</h3>
+                        <button id="${index}" class="remove-note" onclick="removeNote(this.id)">X</button>
+                    </div>
+                    <p>${truncated(element.input)}</p>
+                    <button id="${index}" class="view-more-button" onclick="viewMore(this.id)">View More</button> 
+                </div>
+        `
+    });
+
+    if (notesObj != 0) {
+        noteWraper.innerHTML = html;
+    } else {
+        noteWraper.innerHTML = '<p>No notes added yet</p>'
+    }
+}
+
+// View more 
+const viewMore = (index) => {
+    let notes = localStorage.getItem('notes');
+    const modalText = document.getElementById('modal_text');
+    if (notes === null) {
+        notesObj = [];
+    } else {
+        notesObj = JSON.parse(notes);
+    };
+    modalText.innerText = notesObj[index].input
+    modalContainer.classList.add('show');
 }
 
 closeButton.addEventListener('click', e => {
@@ -69,9 +84,26 @@ closeButton.addEventListener('click', e => {
     modalContainer.classList.remove('show');
 });
 
-function truncate(input) {
+// Remove a note
+const removeNote = (index) => {
+    let notes = localStorage.getItem('notes');
+    if (notes === null) {
+        notesObj = [];
+    } else {
+        notesObj = JSON.parse(notes);
+    };
+
+    notesObj.splice(index, 1);
+    localStorage.setItem('notes', JSON.stringify(notesObj));
+    location.reload();
+}
+
+// Function to truncate the input
+function truncated(input) {
     if (input.length > 100) {
         return input.substring(0, 100) + '...';
     }
     return input;
 };
+
+showNotes();
