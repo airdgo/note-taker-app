@@ -20,7 +20,7 @@ This is a simple app to take notes.
 
 ### Live Site
 
-- [Live Site](https://airdgo-stats-preview-main.netlify.app)
+- [Live Site](https://airdgo-note-taker-app.netlify.app/)
 
 ## My process
 
