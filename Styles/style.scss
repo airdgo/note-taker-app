@@ -61,6 +61,12 @@ body {
     width: 100%;
     max-width: 30rem;
     padding: .7em 1em;
+
+    p {
+        @media (max-width: $breakpoint-phone) {
+            font-size: .9rem;
+        }
+    }
 }
 
 .note-head {
@@ -168,12 +174,6 @@ textarea {
 
 // ====== modal =======
 
-
-.modal p {
-    margin: 1em 0;
-    opacity: .8;
-}
-
 .modal-container {
     display: flex;
     justify-content: center;
@@ -201,6 +201,25 @@ textarea {
     max-width: 70rem;
     padding: 2rem 3rem;
     border-radius: .5em;
+
+    h1 {
+        @media (max-width: $breakpoint-phone) {
+            font-size: 1.4rem;
+        }
+    }
+
+    @media (max-width: $breakpoint-phone) {
+        padding: 1rem 2rem;
+    }
+
+    p {
+        margin: 1em 0;
+        opacity: .8;
+    
+        @media (max-width: $breakpoint-phone) {
+            font-size: .9rem;
+        }
+    }
     
     button {
         display: block;
@@ -215,5 +234,9 @@ textarea {
         background-color: transparent;
         color: #fbfbfb;
         font-size: 1rem;
+        
+        @media (max-width: $breakpoint-phone) {
+            font-size: .9rem;
+        }
 }
 }
